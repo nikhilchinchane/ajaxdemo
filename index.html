@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ajax Demo</title>
+	<link href="css/bootstrap.css" rel="stylesheet"/>
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h3>Adding Two numbers using Ajax</h3>
+		<div class="row">
+			<div class="col-sm-3"><input type="number" name="number1" class="form-control number1" tabindex="1" /></div>
+			<div class="col-sm-1 text-center"><h2 style="margin:0px;">+</h2></div>
+			<div class="col-sm-3"><input type="number" name="number2" class="form-control number2" tabindex="2"/></div>
+			<div class="col-sm-3"><button type="button" name="add" class="btn btn-primary add" tabindex="3">Add</button></div>
+		</div>
+		<div class="row">
+			
+			<div class="col-sm-1 text-center"><h2 style="margin:0px;">=</h2></div>
+			<div class="col-sm-3"><h2 style="margin:0px;" class="result"></h2></div>
+			
+		</div>
+	</div>
+
+	<script>
+		 $(function(){
+		 	//When page is load set focus on first textfiled
+		 	$(".number1").focus();
+
+		 	//On Button click handler
+		 	$(".add").on("click",function(){
+		 	//$(".number2").on("blur",function(){
+
+		 		var number1 = number2 = 0;
+
+		 		//Fetch the value for both textfiled;
+		 		number1 = $(".number1").val();
+		 		number2 = $(".number2").val();
+
+		 		//Sending Ajax request to Server
+		 		$.ajax({
+		 			url:"http://localhost/ajaxdemo/server.php",
+		 			type:"POST",
+		 			data:{'num1':number1,'num2':number2}
+
+		 		}).done(function(response) {
+		 			$(".number1").val("");
+		 			$(".number2").val("");
+
+		 			$(".result").html(response);
+		 		});
+
+		 	});
+		 		
+		 });
+	</script>
+</body>
+</html>
